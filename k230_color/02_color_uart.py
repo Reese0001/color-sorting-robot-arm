@@ -41,6 +41,22 @@ MAX_FRAME_GAP_MS = 500      # 采集长时间停顿后重新积累稳定帧
 SEND_INTERVAL_MS = 100      # 最多 10 次/秒，实际速率取决于识别帧率
 WARMUP_MS = 2000
 
+# ---------- 响应速度模式 ----------
+# 摄像头装在夹爪上，机械臂一动画面就变，所以「多快出结果」和「多稳」是矛盾的，
+# 按阶段切换：
+#   False = 搜索模式。木块静止，宁可慢一点也要稳。门槛 5 帧 / 250 ms。
+#           用于「回到观察姿态 → 看清桌面 → 决定夹哪块」。
+#   True  = 跟踪模式。机械臂正在动，需要快速反馈。门槛降到 2 帧 / 60 ms，
+#           发送间隔 50 ms，容忍更大位移。代价是坐标抖动变大，
+#           只适合「对准阶段」边走边调，不适合做最终夹取判定。
+TRACK_MODE = False
+if TRACK_MODE:
+    STABLE_FRAMES = 2
+    STABLE_MS = 60
+    MAX_CENTER_DRIFT = 24
+    MAX_FRAME_GAP_MS = 200
+    SEND_INTERVAL_MS = 50
+
 # 多色同时稳定时，按这个顺序挑一个上报。
 # (0,1,2) = 红 > 绿 > 蓝。想改成"蓝优先"就写 (2,0,1)。
 PRIORITY = (0, 1, 2)
@@ -232,6 +248,10 @@ def main():
             else:
                 status = "WARMUP" if warming_up else "WAIT: no stable target"
             img.draw_string_advanced(0, 0, 24, status, color=(255, 255, 255))
+            # 右上角标出当前速度模式，免得调参时忘了自己开的是哪个
+            img.draw_string_advanced(WIDTH - 90, 4, 20,
+                                     "TRACK" if TRACK_MODE else "SEARCH",
+                                     color=(255, 255, 0))
             Display.show_image(img)
             frame_count += 1
             if frame_count % 30 == 0:
