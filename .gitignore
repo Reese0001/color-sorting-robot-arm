@@ -1,0 +1,42 @@
+# ===== Python =====
+__pycache__/
+*.py[cod]
+*.pyo
+
+# ===== 板端 / 运行产物 =====
+*.log
+*.bin
+
+# ===== 桌面单元测试产物（测试源码在 WorkBuddy 工作区，不入库）=====
+test.exe
+test_verify.exe
+*.o
+*.obj
+
+# ===== Keil / MDK 编译中间件 =====
+# 用 **/ 匹配任意层级，以后加 stm32_arm/ 之类的工程目录也能覆盖
+**/Objects/
+**/Listings/
+**/DebugConfig/
+**/RTE/
+*.uvguix.*
+*.scvd
+*.hex
+*.axf
+*.elf
+*.map
+*.lst
+*.crf
+*.d
+*.dep
+*.lnp
+*.htm
+*.build_log.htm
+*.sct
+JLinkLog.txt
+JLinkSettings.ini
+
+# ===== 系统文件 =====
+.DS_Store
+Thumbs.db
+desktop.ini
