@@ -1,6 +1,6 @@
 # ============================================================
 # 亚博 K230 红绿蓝木块 —— 阈值自动标定（v2 背景差分版）
-# 文件名：03_auto_calibrate.py
+# 文件名：auto_calibrate.py
 #
 # 为什么要有 v2：
 #   v1（和 Codex 原版思路）是把整个采样框当木块做统计。木块只占框的
@@ -13,7 +13,7 @@
 #   2. 打开本文件，点运行
 #   3. 按屏幕提示，依次把【红】【绿】【蓝】木块放进中间黄框
 #   4. 跑完终端会打印一段 COLOR_THRESHOLDS，整段复制
-#   5. 粘进 02_color_uart.py 替换原来的 COLOR_THRESHOLDS
+#   5. 粘进 color_detection.py 替换原来的 COLOR_THRESHOLDS
 #
 # 调参口诀（框不住 / 框太宽时看这里）：
 #   木块找不到       -> BG_TOL_L / BG_TOL_AB 调大（16/12 -> 24/18）
@@ -544,7 +544,7 @@ def main():
                         printed = True
                         print("")
                         print("=" * 56)
-                        print("  复制下面整段，替换 02_color_uart.py 的 COLOR_THRESHOLDS")
+                        print("  复制下面整段，替换 color_detection.py 的 COLOR_THRESHOLDS")
                         print("=" * 56)
                         print("COLOR_THRESHOLDS = (")
                         for i in range(3):

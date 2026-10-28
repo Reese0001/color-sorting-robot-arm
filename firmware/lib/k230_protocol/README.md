@@ -10,12 +10,37 @@
 | `k230_protocol.h` | 数据结构 + API 声明 + 可调参数 |
 | `k230_protocol.c` | 拼帧状态机 + XOR 校验 + 抓取决策 |
 
-## 一、加进 Keil 工程
+## 一、集成进工程
 
-1. 把两个文件复制到工程目录（建议 `Hardware/k230/`）。
-2. Keil 里右键 `Target` → **Add Group**，命名 `k230`。
-3. 右键该组 → **Add Existing Files** → 选中 `k230_protocol.c`。
-4. **Options for Target → C/C++ → Include Paths** 里加上 `k230` 目录。
+本仓库的 STM32 工程用 **PlatformIO**（`platformio.ini` 在仓库根目录，
+源码路径 `firmware/src`，公共头文件 `firmware/include`）。
+
+### PlatformIO（推荐）
+
+`firmware/lib/` 下的每个子目录会被 PlatformIO 自动当作私有库，**不需要改 `platformio.ini`**：
+
+```ini
+; platformio.ini 里通常只需要保证这一行存在
+lib_extra_dirs = firmware/lib
+```
+
+然后在 `firmware/src/main.c` 里直接：
+
+```c
+#include "k230_protocol.h"
+```
+
+编译时 PlatformIO 会自动把 `firmware/lib/k230_protocol/` 加进头文件搜索路径。
+
+如果你们的 `platformio.ini` 里没有 `lib_extra_dirs`，或者 `lib/` 指向别的位置，
+把这一行加上即可。**不要**手动把 `.c` 文件复制到 `firmware/src/` —— 那会破坏模块边界，
+规范里写明自有模块放 `firmware/lib/<模块名>/`。
+
+### Keil（如果以后换 IDE）
+
+1. Keil 里右键 `Target` → **Add Group**，命名 `k230_protocol`。
+2. 右键该组 → **Add Existing Files** → 选中 `firmware/lib/k230_protocol/k230_protocol.c`。
+3. **Options for Target → C/C++ → Include Paths** 里加上 `firmware/lib/k230_protocol`。
 
 不需要改任何编译选项，C99 和 C89 都能过。
 

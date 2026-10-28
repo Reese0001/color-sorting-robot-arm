@@ -1,6 +1,6 @@
 # ============================================================
 # 亚博 K230 云台扫描 —— 自动寻找红/绿/蓝木块并上报
-# 文件名：05_scan_color.py
+# 文件名：scan_color.py
 #
 # 工作方式：
 #   云台从左扫到右（可选多行），每停一个位置等画面稳住再检测。
@@ -9,8 +9,8 @@
 #   木块被夹走（画面里连续消失）或超时后，自动继续扫描。
 #
 # 前置条件：
-#   1. 已用 03_auto_calibrate.py 标定好阈值，粘到下面 COLOR_THRESHOLDS
-#   2. 已用 04_servo_probe.py 测出云台舵机的 GPIO，填到 PAN_GPIO
+#   1. 已用 auto_calibrate.py 标定好阈值，粘到下面 COLOR_THRESHOLDS
+#   2. 已用 servo_probe.py 测出云台舵机的 GPIO，填到 PAN_GPIO
 #   3. 串口线接好后再把 UART_ENABLED 改成 True
 #
 # 协议（115200 8N1，ASCII，@ 开头 *XX 校验，CRLF 结尾）：
@@ -32,7 +32,7 @@ WIDTH = 640
 HEIGHT = 480
 USE_LCD = True
 
-# ---- 云台舵机（用 04_servo_probe.py 测出来的编号）----
+# ---- 云台舵机（用 servo_probe.py 测出来的编号）----
 PAN_GPIO = 42           # 水平舵机
 PAN_CH = 0
 TILT_GPIO = 43          # 垂直舵机

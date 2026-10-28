@@ -62,7 +62,7 @@ if TRACK_MODE:
 PRIORITY = (0, 1, 2)
 
 # 云台当前角度。02 版是固定视角不控云台，所以填死 90。
-# 换成 05_scan_color.py 那种会转云台的版本时，这里要传实时角度。
+# 换成 scan_color.py 那种会转云台的版本时，这里要传实时角度。
 PAN_FIXED = 90
 TILT_FIXED = 90
 
