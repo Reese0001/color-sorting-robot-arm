@@ -1,0 +1,116 @@
+{
+  "port": "COM8",
+  "read_only": true,
+  "sectors": [
+    {
+      "address": 0,
+      "length": 16384,
+      "actual": "9F28C009",
+      "expected_wire_crc": "9F28C009"
+    },
+    {
+      "address": 0,
+      "length": 1024,
+      "actual": "F4CD5A33",
+      "expected_wire_crc": "F4CD5A33"
+    },
+    {
+      "address": 1024,
+      "length": 1024,
+      "actual": "65C1CA60",
+      "expected_wire_crc": "65C1CA60"
+    },
+    {
+      "address": 2048,
+      "length": 1024,
+      "actual": "D3E4E60F",
+      "expected_wire_crc": "D3E4E60F"
+    },
+    {
+      "address": 3072,
+      "length": 1024,
+      "actual": "0D813E0E",
+      "expected_wire_crc": "0D813E0E"
+    },
+    {
+      "address": 4096,
+      "length": 1024,
+      "actual": "2B8C6553",
+      "expected_wire_crc": "2B8C6553"
+    },
+    {
+      "address": 5120,
+      "length": 1024,
+      "actual": "D7F45AA7",
+      "expected_wire_crc": "D7F45AA7"
+    },
+    {
+      "address": 6144,
+      "length": 1024,
+      "actual": "1DF5D4A2",
+      "expected_wire_crc": "1DF5D4A2"
+    },
+    {
+      "address": 7168,
+      "length": 1024,
+      "actual": "769A69A5",
+      "expected_wire_crc": "769A69A5"
+    },
+    {
+      "address": 8192,
+      "length": 1024,
+      "actual": "A50C7C88",
+      "expected_wire_crc": "A50C7C88"
+    },
+    {
+      "address": 9216,
+      "length": 1024,
+      "actual": "732AB8F3",
+      "expected_wire_crc": "732AB8F3"
+    },
+    {
+      "address": 10240,
+      "length": 1024,
+      "actual": "66EAA5D2",
+      "expected_wire_crc": "66EAA5D2"
+    },
+    {
+      "address": 11264,
+      "length": 1024,
+      "actual": "951D7129",
+      "expected_wire_crc": "951D7129"
+    },
+    {
+      "address": 12288,
+      "length": 1024,
+      "actual": "CAF3DEBB",
+      "expected_wire_crc": "CAF3DEBB"
+    },
+    {
+      "address": 13312,
+      "length": 1024,
+      "actual": "3D8B463D",
+      "expected_wire_crc": "3D8B463D"
+    },
+    {
+      "address": 14336,
+      "length": 1024,
+      "actual": "4BC74614",
+      "expected_wire_crc": "4BC74614"
+    },
+    {
+      "address": 15360,
+      "length": 1024,
+      "actual": "6BE95E25",
+      "expected_wire_crc": "6BE95E25"
+    },
+    {
+      "address": 0,
+      "length": 16384,
+      "actual": "9F28C009",
+      "expected_wire_crc": "9F28C009"
+    }
+  ],
+  "device_info": "3100010001000000000100c03e600100200100000001000000",
+  "readback": "disabled by device policy; left unchanged"
+}

@@ -1,0 +1,20 @@
+{
+  "port": "COM8",
+  "transport": "dotnet",
+  "program_requested": false,
+  "image": {
+    "data_bytes": 16312,
+    "first": "0x0",
+    "last": "0x3fb7",
+    "initial_sp": "0x20200b70",
+    "reset_vector": "0x31b9",
+    "main_flash_only": true
+  },
+  "verify_only_requested": true,
+  "verified": true,
+  "application_started": true,
+  "main_erased": false,
+  "confirmed_written_bytes": 0,
+  "device_info": "3100010001000000000100c03e600100200100000001000000",
+  "crc32": "9F28C009"
+}

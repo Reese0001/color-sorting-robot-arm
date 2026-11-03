@@ -1,0 +1,11 @@
+{
+  "port": "COM8",
+  "baud": 115200,
+  "data_bits": 8,
+  "parity": "None",
+  "stop_bits": "One",
+  "flow_control": "None",
+  "dtr": false,
+  "rts": false,
+  "note": "2026-11-01 detected USB-SERIAL CH340. Port may change after reconnect. Application baud; NOT BSL baud."
+}

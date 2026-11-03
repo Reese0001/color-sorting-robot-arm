@@ -1,0 +1,12 @@
+{
+  "timestamp": "2026-11-03T20:39:26.1403386+08:00",
+  "port": "COM8",
+  "baud": 115200,
+  "passed": true,
+  "commands_sent": [
+    "PING",
+    "STATUS"
+  ],
+  "failure": null,
+  "transcript": "STATUS ms=26000 online=0 seq=0 target=NONE ok=0 bad=1 drop=2 motion=0 armed=0 bus=0\r\nPONG MSPM0G3507\r\nSTATUS ms=26070 online=0 seq=0 target=NONE ok=0 bad=1 drop=2 motion=0 armed=0 bus=0\r\n"
+}

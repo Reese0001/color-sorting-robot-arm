@@ -1,0 +1,2 @@
+# Only needed for k230_sender.py serial output or optional pyserial BSL transport.
+pyserial==3.5

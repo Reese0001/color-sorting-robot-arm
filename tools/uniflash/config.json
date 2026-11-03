@@ -1,0 +1,4 @@
+{
+  "firmware_sha256": "ce9a961c87d8072bd5d9ca1b0bbc80120e5738a781326dabd1291ff385fc671d",
+  "note": "Approved bench image only. Folder name retained for compatibility; no UniFlash dependency."
+}

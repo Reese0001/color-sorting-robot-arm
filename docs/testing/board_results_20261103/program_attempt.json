@@ -1,0 +1,19 @@
+{
+  "port": "COM8",
+  "transport": "dotnet",
+  "program_requested": true,
+  "image": {
+    "data_bytes": 16312,
+    "first": "0x0",
+    "last": "0x3fb7",
+    "initial_sp": "0x20200b70",
+    "reset_vector": "0x31b9",
+    "main_flash_only": true
+  },
+  "verified": false,
+  "application_started": false,
+  "main_erased": true,
+  "confirmed_written_bytes": 16384,
+  "device_info": "3100010001000000000100c03e600100200100000001000000",
+  "error": "MAIN verification failed: device=0BE69001, expected=9F28C009"
+}

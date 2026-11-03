@@ -1,0 +1,42 @@
+﻿机械臂项目代码 — 先看这里
+整理日期：2026-11-03
+主控：MSPM0G3507；视觉板：亚博 K230。
+
+一、主控代码
+用 Keil5 打开：firmware/keil/robot_mspm0.uvprojx
+主程序：firmware/src/main.c
+引脚、串口、PWM：firmware/src/board_mspm0.c
+参数开关：firmware/include/app_config.h
+分拣流程：firmware/src/robot_workflow.c
+关节与姿态：firmware/src/robot_config.c
+这些 C/H 一起编译，固件运行在 MSPM0 板子上。
+
+二、K230 代码
+用 CanMV IDE K230 打开 vision/k230 下的 Python 文件。
+camera_check.py：相机自检。
+auto_calibrate.py：颜色阈值采样，待真实木块现场标定。
+color_detection.py：红绿蓝识别和坐标数据。
+这些程序运行在 K230 上，不是电脑 Python。
+archive_k230_pwm 是旧试验归档，不是当前运行入口。
+
+三、电脑演练
+双击 tools/打开无舵机演练.bat。
+用 Python 3 + GCC 在电脑上运行，不需要连接主控或摄像头。
+
+四、主控复测
+主控已经烧录成功，正常运行不用再烧录，也不用按 BSL。
+双击 tools/烧录后检查串口.bat 或 tools/板端三色流程自检_不动舵机.bat。
+这些工具用 PowerShell 7 在电脑运行，通过 USB 与主控通信。
+当前动作输出关闭，三色测试是模拟流程，不会带动机械臂。
+
+五、详细导航
+README.md：总览。
+docs/代码导航.md：每个环节对应哪些代码。
+docs/软件与运行方式.md：用什么软件编辑和运行。
+docs/通信协议.md：数据格式。
+hardware/wiring/MSPM0G3507接线.md：接线。
+docs/testing/源码包验证_20261103.md：本次整理后的编译和测试结果。
+
+当前没有上传 GitHub。GitHub 上传说明仅供以后使用。
+代码文件由助手直接创建/编辑，主控使用 Keil5 编译；不是所有代码都在 Keil5 运行。
+保留整个文件夹，不要只拿走 uvprojx。后续建议统一在这份桌面代码中修改，避免两份目录混淆。
