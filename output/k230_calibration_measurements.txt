@@ -1,0 +1,44 @@
+K230 coordinate calibration, 640x480, paper top at cube-top height (30 mm).
+Source image: output/k230_calibration_frame_current.png
+Printed grid: 160 x 160 mm; A bottom-left, B bottom-right, C top-right, D top-left.
+Point       pixel u,v       printed x,y (mm)
+A           219,321         0,0
+B           477,301         160,0
+C           438,25          160,160
+D           224,39          0,160
+Independent check points (pixel positions read from saved frame):
+E           342,156         80,80         mapped 81.94,81.28; error 2.32 mm
+F           280,96          40,120        mapped 40.57,120.07; error 0.57 mm
+G           409,222         120,40        mapped 122.93,42.16; error 3.64 mm
+Mapping: vision/k230/coordinate_map.py
+These are approximate manually picked pixel centres. Independent check error is
+up to 3.64 mm in this frame. The paper was moved since the previous capture.
+User measured the base yaw axis 75 mm left and 170 mm behind A. With +Y from A
+toward D designated forward, base is (-75,-170) mm in paper coordinates.
+Confirm this direction in person. At assumed grasp-centre z=15 mm and shoulder
+height 144 mm, C needs 425.2 mm straight-line reach, beyond the loose 405 mm
+total-link gate; other printed points pass this loose gate only. Joint limits
+and wrist pitch remain unchecked. Validate a physical touch before motion.
+
+E-point blue-block trial, later frame: output/k230_e_point_blue.png
+The paper corners changed in the camera frame, so the earlier image homography
+was superseded by the one in coordinate_map.py. Current A/B/C/D pixel centres:
+A (177,341), B (446,308), C (403,32), D (186,53).
+Independent visible checks: F (243,110) -> (40.67,118.63), error 1.53 mm;
+G (371,235) -> (119.92,39.76), error 0.25 mm. E is occluded by the cube.
+IDE shows BLUE STABLE, pixel centre (296,151), mapped (75.75,90.38) mm.
+If the cube was centred at E (80,80), this is an 11.22 mm projected offset.
+The detection encloses visible cube faces; its colour-blob centroid is not a
+verified grasp centre. A cube placed on top of a paper raised 30 mm also has
+its top at 60 mm, outside the calibrated 30 mm plane. Paper/base movement
+since the user's -75,-170 mm measurement was confirmed. The user moved the
+printed paper or riser, so that base-to-A measurement is now invalid and must
+be repeated before calculating arm-relative coordinates. The user confirmed
+the blue cube is on the raised calibration paper. If the riser remains 30 mm,
+the cube top is at about 60 mm above the table, whereas the paper homography
+is for 30 mm. Thus the 11.22 mm number is not a valid grasp-position error.
+
+E-point red-block trial: output/k230_e_point_red.png (user saved).
+IDE overlay: UNCAL RED STABLE 5/5; RAW 1 KEEP 1; detected pixel centre
+(306,142). The red block is enclosed by one detection box. This checks
+colour and stable detection only; the blob centre is not a grasp point.

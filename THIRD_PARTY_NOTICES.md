@@ -6,4 +6,4 @@
 
 Keil、CanMV IDE、TI 设备包、Python、GCC、PowerShell 以及可选 pySerial 需按各自许可安装；没有把这些安装程序或系统驱动打包。
 
-项目自有代码尚未单独选择开源许可证，本次没有擅自套用 MIT/GPL。公开仓库之前可按实际需求补充 LICENSE，不能用它覆盖第三方许可证。
+项目自有代码的许可见根目录 [LICENSE](LICENSE)。`firmware/g3519_wiring_test/pololu/` 保留 VL53L0X 库及原许可。`build/sdk_overlay/` 中的 TI 头文件保留原版权声明。课堂包中的厂商文档、上位机和参考库按各自许可使用。

@@ -1,0 +1,47 @@
+/**
+ * @cliArgs --device "MSPM0G351X" --part "Default" --package "LQFP-48(PT)"
+ * @v2CliArgs --device "MSPM0G3519" --package "LQFP-48(PT)"
+ */
+const sys = scripting.addModule("/ti/driverlib/SYSCTL");
+sys.forceDefaultClkConfig = true;
+
+const gpio = scripting.addModule("/ti/driverlib/GPIO", {}, false);
+const oled = gpio.addInstance();
+oled.$name = "OLED";
+oled.port = "PORTA";
+oled.associatedPins.create(5);
+for (const [i, [name, pin]] of [["RST",24], ["CS",27], ["DC",17], ["MOSI",21], ["CLK",12]].entries()) {
+    const p = oled.associatedPins[i];
+    p.$name = name;
+    p.assignedPin = String(pin);
+    p.pin.$assign = "PA" + pin;
+    p.direction = "OUTPUT";
+    p.initialValue = name === "CS" ? "SET" : "CLEARED";
+}
+const led = gpio.addInstance();
+led.$name = "HEART";
+led.port = "PORTB";
+led.associatedPins[0].$name = "LED";
+led.associatedPins[0].assignedPin = "2";
+led.associatedPins[0].pin.$assign = "PB2";
+
+const uart = scripting.addModule("/ti/driverlib/UART", {}, false);
+for (const [name, instance, tx, rx] of [
+    ["CAMERA", "UART3", "PA26", "PA25"],
+    ["BUS", "UART7", "PA13", "PA14"]]) {
+    const port = uart.addInstance();
+    port.$name = name;
+    port.targetBaudRate = 115200;
+    port.enabledInterrupts = ["RX"];
+    port.peripheral.$assign = instance;
+    port.peripheral.txPin.$assign = tx;
+    port.peripheral.rxPin.$assign = rx;
+}
+const i2c = scripting.addModule("/ti/driverlib/I2C", {}, false).addInstance();
+i2c.$name = "RANGE";
+i2c.basicEnableController = true;
+i2c.basicControllerBusSpeed = 100000;
+i2c.peripheral.$assign = "I2C1";
+i2c.peripheral.sdaPin.$assign = "PA16";
+i2c.peripheral.sclPin.$assign = "PA15";
+

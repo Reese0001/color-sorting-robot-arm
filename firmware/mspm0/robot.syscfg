@@ -1,0 +1,69 @@
+/**
+ * @cliArgs --device "MSPM0G350X" --part "Default" --package "LQFP-64(PM)" --product "mspm0_sdk@2.10.00.04"
+ * @v2CliArgs --device "MSPM0G3507" --package "LQFP-64(PM)" --product "mspm0_sdk@2.10.00.04"
+ */
+const SYSCTL = scripting.addModule("/ti/driverlib/SYSCTL");
+SYSCTL.forceDefaultClkConfig = true;
+const GPIO = scripting.addModule("/ti/driverlib/GPIO", {}, false);
+const key = GPIO.addInstance();
+key.$name = "STOP_KEY";
+key.associatedPins[0].$name = "K1";
+key.associatedPins[0].direction = "INPUT";
+key.associatedPins[0].pin.$assign = "PA2";
+const UART = scripting.addModule("/ti/driverlib/UART", {}, false);
+const debug = UART.addInstance();
+debug.$name = "CONSOLE";
+debug.targetBaudRate = 115200;
+debug.enabledInterrupts = ["RX"];
+debug.peripheral.$assign = "UART3";
+debug.peripheral.txPin.$assign = "PA14";
+debug.peripheral.rxPin.$assign = "PA13";
+const bus = UART.addInstance();
+bus.$name = "SERVO_BUS";
+bus.targetBaudRate = 115200;
+bus.enabledInterrupts = ["RX"];
+bus.peripheral.$assign = "UART1";
+bus.peripheral.txPin.$assign = "PB6";
+bus.peripheral.rxPin.$assign = "PB7";
+const camera = UART.addInstance();
+camera.$name = "CAMERA";
+camera.targetBaudRate = 115200;
+camera.enabledInterrupts = ["RX"];
+camera.peripheral.$assign = "UART2";
+camera.peripheral.txPin.$assign = "PA21";
+camera.peripheral.rxPin.$assign = "PA22";
+const PWM = scripting.addModule("/ti/driverlib/PWM", {}, false);
+// PB18 and PB19 use channel 1 on different timers.
+const servo = PWM.addInstance();
+servo.$name = "ARM_PWM";
+servo.ccIndex = [1];
+servo.pwmMode = "EDGE_ALIGN_UP";
+servo.clockDivider = 1;
+servo.clockPrescale = 32;
+servo.timerCount = 20000;
+servo.timerStartTimer = false;
+servo.peripheral.$assign = "TIMA1";
+servo.peripheral.ccp1Pin.$assign = "PB18";
+servo.PWM_CHANNEL_1.dutyCycle = 0;
+const shoulder = PWM.addInstance();
+shoulder.$name = "SHOULDER_PWM";
+shoulder.ccIndex = [1];
+shoulder.pwmMode = "EDGE_ALIGN_UP";
+shoulder.clockDivider = 1;
+shoulder.clockPrescale = 32;
+shoulder.timerCount = 20000;
+shoulder.timerStartTimer = false;
+shoulder.peripheral.$assign = "TIMG8";
+shoulder.peripheral.ccp1Pin.$assign = "PB19";
+shoulder.PWM_CHANNEL_1.dutyCycle = 0;
+const Board = scripting.addModule("/ti/driverlib/Board", {}, false);
+Board.peripheral.$assign = "DEBUGSS";
+Board.peripheral.swclkPin.$assign = "PA20";
+Board.peripheral.swdioPin.$assign = "PA19";
+const WWDT = scripting.addModule("/ti/driverlib/WWDT", {}, false);
+const watchdog = WWDT.addInstance();
+watchdog.$name = "WATCHDOG";
+watchdog.clockDivider = "8";
+watchdog.periodCount = "10";
+watchdog.window0ClosedPeriod = "0";
+

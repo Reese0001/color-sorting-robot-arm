@@ -1,0 +1,42 @@
+/**
+ * @cliArgs --device "MSPM0G351X" --part "Default" --package "LQFP-48(PT)"
+ * @v2CliArgs --device "MSPM0G3519" --package "LQFP-48(PT)"
+ */
+const sys = scripting.addModule("/ti/driverlib/SYSCTL");
+sys.forceDefaultClkConfig = true;
+const gpio = scripting.addModule("/ti/driverlib/GPIO", {}, false);
+const oled = gpio.addInstance();
+oled.$name = "OLED";
+oled.port = "PORTA";
+oled.associatedPins.create(5);
+for (const [i, [name, pin]] of [["RST",24], ["CS",27], ["DC",17], ["MOSI",21], ["CLK",22]].entries()) {
+    const p = oled.associatedPins[i];
+    p.$name = name;
+    p.assignedPin = String(pin);
+    p.pin.$assign = "PA" + pin;
+    p.direction = "OUTPUT";
+    p.initialValue = name === "CS" ? "SET" : "CLEARED";
+}
+for (const [port, pins] of [["A", [["K1",2], ["K4",23]]], ["B", [["K2",19], ["K3",20]]]]) {
+    const group = gpio.addInstance();
+    group.$name = "KEYS" + port;
+    group.port = "PORT" + port;
+    group.associatedPins.create(2);
+    for (const [i, [name, pin]] of pins.entries()) {
+        const p = group.associatedPins[i];
+        p.$name = name;
+        p.assignedPin = String(pin);
+        p.pin.$assign = "P" + port + pin;
+        p.direction = "INPUT";
+        p.internalResistor = "PULL_UP";
+    }
+}
+const bus = scripting.addModule("/ti/driverlib/UART", {}, false).addInstance();
+bus.$name = "BUS";
+bus.targetBaudRate = 115200;
+bus.enableFIFO = true;
+bus.rxFifoThreshold = "DL_UART_RX_FIFO_LEVEL_ONE_ENTRY";
+bus.enabledInterrupts = ["RX"];
+bus.peripheral.$assign = "UART7";
+bus.peripheral.txPin.$assign = "PA13";
+bus.peripheral.rxPin.$assign = "PA14";

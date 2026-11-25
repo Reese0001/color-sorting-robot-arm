@@ -35,3 +35,18 @@ docs/testing/无舵机演练日志.txt
 deliverables/
 .DS_Store
 Thumbs.db
+
+# Local diagnostics, board backups and build products
+/_tmp_*
+/tmp_board_crop.jpg
+/output/k230_ide_recovery/board_backup/
+/.pio/
+/.vscode/
+firmware/.pio/
+openmv/*.bak
+.pytest_cache/
+/build/*
+!/build/sdk_overlay/
+/dist/*
+!/dist/Robot1机械臂课堂调试资源包.zip
+!/output/mspm0g3519/*.hex

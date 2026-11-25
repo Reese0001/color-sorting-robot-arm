@@ -3,3 +3,5 @@
 *.hex binary
 *.png binary
 *.zip binary
+*.pdf binary
+*.jpg binary
